@@ -17,6 +17,7 @@ body {
     top: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1000;
+    flex-wrap: wrap; /* Melhor para telas pequenas */
 }
 
 .nav-links {
@@ -34,14 +35,18 @@ body {
     transition: background-color 0.3s;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a:focus {
     background-color: #e0e0e0;
+    outline: 2px solid #007aff; /* Acessibilidade */
+    outline-offset: 2px;
 }
 
 .user-controls {
     display: flex;
     gap: 15px;
     align-items: center;
+    margin-top: 10px; /* Adaptação em telas menores */
 }
 
 #theme-toggle {
@@ -55,12 +60,16 @@ body {
     transition: background-color 0.3s;
 }
 
-#theme-toggle:hover {
+#theme-toggle:hover,
+#theme-toggle:focus {
     background-color: #005bb5;
+    outline: 2px solid #007aff;
+    outline-offset: 2px;
 }
 
-.main {
+main {
     padding-top: 80px;
+    padding-bottom: 80px; /* Espaço para o footer */
 }
 
 .section {
@@ -71,6 +80,7 @@ body {
     display: flex;
     gap: 10px;
     overflow: auto;
+    scroll-behavior: smooth; /* Suavização no scroll */
 }
 
 .carousel-item {
@@ -115,11 +125,12 @@ body {
     align-items: center;
     font-size: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .genre:hover {
     transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 footer {
@@ -145,14 +156,19 @@ footer {
     color: #fff;
     border: none;
     padding: 10px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
 }
 
-.music-controls button:hover {
+.music-controls button:hover,
+.music-controls button:focus {
     background-color: #005bb5;
+    outline: 2px solid #007aff;
+    outline-offset: 2px;
 }
 
 .progress-bar, .volume-control {
@@ -162,14 +178,28 @@ footer {
 }
 
 .progress-bar input, .volume-control input {
+    appearance: none;
     width: 100px;
+    height: 6px;
+    background-color: #d1d1d1;
+    border-radius: 3px;
     cursor: pointer;
-    transition: background-color 0.3s;
+}
+
+.progress-bar input::-webkit-slider-thumb,
+.volume-control input::-webkit-slider-thumb {
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background-color: #007aff;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 #search-input {
     width: 100%;
     padding: 10px;
+    background-color: #f9f9f9;
     border: 1px solid #d1d1d1;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -184,7 +214,7 @@ footer {
     display: flex;
     align-items: center;
     gap: 10px;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .search-result img {
@@ -195,7 +225,22 @@ footer {
 
 .search-result:hover {
     transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-
-  
+@media (max-width: 600px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+    .user-controls {
+        margin-top: 10px;
+    }
+    .carousel-item {
+        width: 80%;
+        height: auto;
+    }
+    .genre {
+        width: 100px;
+        height: 100px;
+    }
+}
