@@ -1,13 +1,13 @@
 {
     "songs": [
         {
-            "title": "Song 1",
-            "artist": "Artist 1",
-            "album_cover": "cover1.jpg",
-            "audio": "song1.mp3",
+            "title": "New Brain",
+            "artist": "Skye Riley",
+            "album_cover": "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/OIP.jpeg?v=1733705020179",
+            "audio": "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/New_Brain_performed_by_Naomi_Scott_%5B_YTBMP3.org_%5D.mp3?v=1733705309475",
             "format": "mp3",
-            "length": "3:45",
-            "icon": "artist1.jpg",
+            "length": "3:04",
+            "icon": "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/30ba4cfd-ab3e-47a6-9e52-f15fd873f41a.image.png?v=1733705376349",
             "canvas": "canvas1.mp4"
         },
         {
