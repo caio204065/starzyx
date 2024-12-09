@@ -5,16 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Music Streaming Service</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">MyMusic</div>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Explorar</a></li>
-                <li><a href="#">Sua Biblioteca</a></li>
-                <li><a href="#">Buscar</a></li>
+                <li><a href="#" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" onclick="showSection('explorar')">Explorar</a></li>
+                <li><a href="#" onclick="showSection('biblioteca')">Sua Biblioteca</a></li>
+                <li><a href="#" onclick="showSection('buscar')">Buscar</a></li>
             </ul>
             <div class="user-controls">
                 <i class="fas fa-user-circle"></i>
@@ -24,33 +25,80 @@
         </nav>
     </header>
     <main>
-        <section class="highlights">
-            <div class="carousel">
-                <!-- Carrossel de Destaques -->
-                <div class="carousel-item">Destaque 1</div>
-                <div class="carousel-item">Destaque 2</div>
-                <div class="carousel-item">Destaque 3</div>
-            </div>
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <section class="highlights">
+                <div class="carousel">
+                    <!-- Carrossel de Destaques -->
+                    <div class="carousel-item">Destaque 1</div>
+                    <div class="carousel-item">Destaque 2</div>
+                    <div class="carousel-item">Destaque 3</div>
+                </div>
+            </section>
+            <section class="suggestions">
+                <h2>Tocados Recentemente</h2>
+                <div class="horizontal-list" id="recently-played"></div>
+                <h2>Feito para Você</h2>
+                <div class="horizontal-list" id="for-you"></div>
+                <h2>Novidades do Gênero Favorito</h2>
+                <div class="horizontal-list" id="new-releases"></div>
+            </section>
         </section>
-        <section class="suggestions">
-            <h2>Tocados Recentemente</h2>
-            <div class="horizontal-list">
-                <!-- Itens tocados recentemente -->
-            </div>
-            <h2>Feito para Você</h2>
-            <div class="horizontal-list">
-                <!-- Sugestões personalizadas -->
-            </div>
-            <h2>Novidades do Gênero Favorito</h2>
-            <div class="horizontal-list">
-                <!-- Novidades do gênero -->
-            </div>
+        
+        <!-- Explorar Section -->
+        <section id="explorar" class="section" style="display: none;">
+            <section class="genres">
+                <h2>Gêneros e Mood</h2>
+                <div class="genre-list">
+                    <div class="genre">Rock</div>
+                    <div class="genre">Pop</div>
+                    <div class="genre">Hip-Hop</div>
+                    <!-- Outros Gêneros -->
+                </div>
+            </section>
+            <section class="rankings">
+                <h2>Top 10 Músicas/Artistas</h2>
+                <div class="ranking-list">
+                    <!-- Lista de Top 10 -->
+                </div>
+                <h2>Lançamentos da Semana</h2>
+                <div class="new-releases-list">
+                    <!-- Lista de Lançamentos -->
+                </div>
+            </section>
+        </section>
+        
+        <!-- Biblioteca Section -->
+        <section id="biblioteca" class="section" style="display: none;">
+            <section class="favorites">
+                <h2>Seus Favoritos</h2>
+                <div class="favorites-list">
+                    <!-- Lista de Favoritos -->
+                </div>
+            </section>
+            <section class="playlists">
+                <h2>Playlists Criadas</h2>
+                <div class="playlists-list">
+                    <!-- Lista de Playlists -->
+                </div>
+            </section>
+        </section>
+        
+        <!-- Buscar Section -->
+        <section id="buscar" class="section" style="display: none;">
+            <section class="search">
+                <input type="text" id="search-input" placeholder="Buscar músicas, artistas, álbuns...">
+                <button onclick="searchMusic()">Buscar</button>
+                <div class="search-results" id="search-results">
+                    <!-- Resultados da Busca -->
+                </div>
+            </section>
         </section>
     </main>
     <footer>
         <div class="music-controls">
-            <button id="play-pause"><i class="fas fa-play"></i></button>
             <button id="prev"><i class="fas fa-backward"></i></button>
+            <button id="play-pause"><i class="fas fa-play"></i></button>
             <button id="next"><i class="fas fa-forward"></i></button>
             <div class="progress-bar">
                 <input type="range" min="0" max="100" value="0">
@@ -61,7 +109,6 @@
             </div>
         </div>
     </footer>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
