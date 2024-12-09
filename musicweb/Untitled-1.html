@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Music Streaming Service</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">MyMusic</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Explorar</a></li>
+                <li><a href="#">Sua Biblioteca</a></li>
+                <li><a href="#">Buscar</a></li>
+            </ul>
+            <div class="user-controls">
+                <i class="fas fa-user-circle"></i>
+                <i class="fas fa-cog"></i>
+                <button id="theme-toggle">Dark Mode</button>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="highlights">
+            <div class="carousel">
+                <!-- Carrossel de Destaques -->
+                <div class="carousel-item">Destaque 1</div>
+                <div class="carousel-item">Destaque 2</div>
+                <div class="carousel-item">Destaque 3</div>
+            </div>
+        </section>
+        <section class="suggestions">
+            <h2>Tocados Recentemente</h2>
+            <div class="horizontal-list">
+                <!-- Itens tocados recentemente -->
+            </div>
+            <h2>Feito para Você</h2>
+            <div class="horizontal-list">
+                <!-- Sugestões personalizadas -->
+            </div>
+            <h2>Novidades do Gênero Favorito</h2>
+            <div class="horizontal-list">
+                <!-- Novidades do gênero -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="music-controls">
+            <button id="play-pause"><i class="fas fa-play"></i></button>
+            <button id="prev"><i class="fas fa-backward"></i></button>
+            <button id="next"><i class="fas fa-forward"></i></button>
+            <div class="progress-bar">
+                <input type="range" min="0" max="100" value="0">
+            </div>
+            <div class="volume-control">
+                <i class="fas fa-volume-up"></i>
+                <input type="range" min="0" max="100" value="50">
+            </div>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
