@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Music Streaming Service</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://kit.fontawesome.com/a076d053.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -18,8 +18,8 @@
                 <li><a href="#" onclick="showSection('buscar')">Buscar</a></li>
             </ul>
             <div class="user-controls">
-                <i class="fas fa-user-circle"></i>
-                <i class="fas fa-cog"></i>
+                <i class="fas fa-user-circle" aria-label="User Profile"></i>
+                <i class="fas fa-cog" aria-label="Settings"></i>
                 <button id="theme-toggle">Dark Mode</button>
             </div>
         </nav>
@@ -41,74 +41,78 @@
                 <h2>Feito para Você</h2>
                 <div class="horizontal-list" id="for-you"></div>
                 <h2>Novidades do Gênero Favorito</h2>
-                <div class="horizontal-list" id="new-releases"></div>
+                <div class="horizontal-list" id="favorite-releases"></div>
             </section>
         </section>
         
         <!-- Explorar Section -->
-        <section id="explorar" class="section" style="display: none;">
+        <section id="explorar" class="section hidden">
             <section class="genres">
                 <h2>Gêneros e Mood</h2>
                 <div class="genre-list">
                     <div class="genre">Rock</div>
                     <div class="genre">Pop</div>
                     <div class="genre">Hip-Hop</div>
-                    <!-- Outros Gêneros -->
                 </div>
             </section>
             <section class="rankings">
                 <h2>Top 10 Músicas/Artistas</h2>
-                <div class="ranking-list">
-                    <!-- Lista de Top 10 -->
-                </div>
+                <div class="ranking-list"></div>
                 <h2>Lançamentos da Semana</h2>
-                <div class="new-releases-list">
-                    <!-- Lista de Lançamentos -->
-                </div>
+                <div class="new-releases-list"></div>
             </section>
         </section>
         
         <!-- Biblioteca Section -->
-        <section id="biblioteca" class="section" style="display: none;">
+        <section id="biblioteca" class="section hidden">
             <section class="favorites">
                 <h2>Seus Favoritos</h2>
-                <div class="favorites-list">
-                    <!-- Lista de Favoritos -->
-                </div>
+                <div class="favorites-list"></div>
             </section>
             <section class="playlists">
                 <h2>Playlists Criadas</h2>
-                <div class="playlists-list">
-                    <!-- Lista de Playlists -->
-                </div>
+                <div class="playlists-list"></div>
             </section>
         </section>
         
         <!-- Buscar Section -->
-        <section id="buscar" class="section" style="display: none;">
+        <section id="buscar" class="section hidden">
             <section class="search">
                 <input type="text" id="search-input" placeholder="Buscar músicas, artistas, álbuns...">
                 <button onclick="searchMusic()">Buscar</button>
-                <div class="search-results" id="search-results">
-                    <!-- Resultados da Busca -->
-                </div>
+                <div class="search-results" id="search-results"></div>
             </section>
         </section>
     </main>
     <footer>
         <div class="music-controls">
-            <button id="prev"><i class="fas fa-backward"></i></button>
-            <button id="play-pause"><i class="fas fa-play"></i></button>
-            <button id="next"><i class="fas fa-forward"></i></button>
+            <button id="prev"><i class="fas fa-backward" aria-label="Previous"></i></button>
+            <button id="play-pause"><i class="fas fa-play" aria-label="Play/Pause"></i></button>
+            <button id="next"><i class="fas fa-forward" aria-label="Next"></i></button>
             <div class="progress-bar">
-                <input type="range" min="0" max="100" value="0">
+                <label for="progress-range">Progress</label>
+                <input id="progress-range" type="range" min="0" max="100" value="0">
             </div>
             <div class="volume-control">
-                <i class="fas fa-volume-up"></i>
-                <input type="range" min="0" max="100" value="50">
+                <label for="volume-range">Volume</label>
+                <input id="volume-range" type="range" min="0" max="100" value="50">
             </div>
         </div>
     </footer>
-    <script src="app.js"></script>
+    <script>
+        // Alterna entre as seções
+        function showSection(sectionId) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        // Alterna o tema entre claro e escuro
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
 </html>
