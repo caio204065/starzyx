@@ -1,72 +1,99 @@
-// Função para carregar as músicas do arquivo JSON
-fetch('songs.json')
-  .then(response => response.json())
-  .then(data => {
-    const songs = data.songs; // Lista de músicas carregada do JSON
-    let currentSongIndex = 0; // Índice da música atual
-
-    // Função para carregar uma música
-    function loadSong(songIndex) {
-        const song = songs[songIndex];
-        const audio = new Audio();
-        audio.src = song.audio;
-        audio.load(); // Carrega a música
-        songTitle.textContent = song.title;
-        songArtist.textContent = song.artist;
-        albumCover.src = song.album_cover;
-        songLength.textContent = song.length;
-        playPauseButton.innerHTML = '<i class="fas fa-play"></i>'; // Resetando o botão de play/pause
-        progressBar.value = 0; // Reseta a barra de progresso
-
-        // Aplicando as configurações de canva
-        document.body.style.backgroundColor = song.canva.background_color;
-        albumCover.style.position = song.canva.album_cover_position;
-        songTitle.style.fontWeight = song.canva.song_title_style === 'bold' ? 'bold' : 'normal';
-        songTitle.style.fontStyle = song.canva.song_title_style === 'italic' ? 'italic' : 'normal';
-        albumCover.style.borderRadius = song.canva.album_cover_border_radius;
-
-        console.log(`Carregando: ${song.title} - ${song.artist}`);
-    }
-
-    // Carregar a primeira música
-    loadSong(currentSongIndex);
-
-    // Lógica do botão de Play/Pause
-    playPauseButton.addEventListener('click', () => {
-        const audio = new Audio();
-        if (audio.paused) {
-            audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
-            playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-        } else {
-            audio.pause();
-            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-        }
-    });
-
-    // Lógica para tocar a música anterior
-    prevButton.addEventListener('click', () => {
-        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length; // Atualiza o índice para a música anterior
-        loadSong(currentSongIndex);
-        audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
-    });
-
-    // Lógica para tocar a próxima música
-    nextButton.addEventListener('click', () => {
-        currentSongIndex = (currentSongIndex + 1) % songs.length; // Atualiza o índice para a próxima música
-        loadSong(currentSongIndex);
-        audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
-    });
-
-    // Adicionando as músicas ao menu (supondo que você tenha um elemento para a lista de músicas)
-    songs.forEach((song, index) => {
-        const songItem = document.createElement('li');
-        songItem.textContent = `${song.title} - ${song.artist}`;
-        songItem.addEventListener('click', () => {
-            loadSong(index);
-            audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+  <script>
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isLightTheme = document.body.classList.contains('light-theme');
+            document.getElementById('theme-toggle').textContent = isLightTheme ? 'Dark Mode' : 'Light Mode';
         });
-        songList.appendChild(songItem); // Adiciona a música à lista
-    });
 
-  })
-  .catch(error => console.error('Erro ao carregar o arquivo JSON:', error));
+        const playPauseButton = document.getElementById('play-pause');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        const progressBar = document.getElementById('progress');
+
+        if (playPauseButton && prevButton && nextButton && progressBar) {
+            let audio = new Audio();
+            let currentSongIndex = 0;
+            const songs = [
+                {
+                    title: "New Brain",
+                    artist: "Skye Riley",
+                    album_cover: "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/OIP.jpeg?v=1733705020179",
+                    audio: "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/New_Brain_performed_by_Naomi_Scott_%5B_YTBMP3.org_%5D.mp3?v=1733705309475",
+                    length: "3:04",
+                    icon: "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/30ba4cfd-ab3e-47a6-9e52-f15fd873f41a.image.png?v=1733705376349",
+                    canvas: "canvas1.mp4"
+                },
+                {
+                    title: "Song 2",
+                    artist: "Artist 2",
+                    album_cover: "cover2.jpg",
+                    audio: "song2.ogg",
+                    length: "4:15",
+                    icon: "artist2.jpg",
+                    canvas: "canvas2.mp4"
+                }
+            ];
+
+            function loadSong(songIndex) {
+                const song = songs[songIndex];
+                audio.src = song.audio;
+                audio.load();
+
+                // Atualizando os detalhes da música
+                document.getElementById('album-cover').src = song.album_cover;
+                document.getElementById('song-title').textContent = song.title;
+                document.getElementById('song-artist').textContent = song.artist;
+                document.getElementById('song-length').textContent = song.length;
+
+                // Carregar o vídeo (canvas)
+                const canvasVideo = document.getElementById('canvas-video');
+                canvasVideo.src = song.canvas;
+                canvasVideo.load();
+                canvasVideo.play();
+
+                // Resetando a barra de progresso
+                progressBar.value = 0;
+                playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+            }
+
+            loadSong(currentSongIndex);
+
+            playPauseButton.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+                    playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    audio.pause();
+                    playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+                loadSong(currentSongIndex);
+                audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+                loadSong(currentSongIndex);
+                audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+            });
+
+            // Atualizando a barra de progresso enquanto a música toca
+            audio.ontimeupdate = () => {
+                if (!audio.paused) {
+                    const progress = (audio.currentTime / audio.duration) * 100;
+                    progressBar.value = progress;
+                }
+            };
+
+            // Permitindo que o usuário mude a posição da música
+            progressBar.addEventListener('input', () => {
+                const newTime = (progressBar.value / 100) * audio.duration;
+                audio.currentTime = newTime;
+            });
+        } else {
+            console.error('Um ou mais botões de controle de música não foram encontrados.');
+        }
+    </script>
