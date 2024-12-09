@@ -1,51 +1,44 @@
 document.getElementById('theme-toggle').addEventListener('click', () => {
     document.body.classList.toggle('light-theme');
+
+    // Atualiza o texto do botão com base no tema atual
+    const isLightTheme = document.body.classList.contains('light-theme');
+    document.getElementById('theme-toggle').textContent = isLightTheme ? 'Dark Mode' : 'Light Mode';
 });
 
-const audio = new Audio();
+// Certifique-se de que os elementos existam antes de adicionar os event listeners
+const playPauseButton = document.getElementById('play-pause');
+const prevButton = document.getElementById('prev');
+const nextButton = document.getElementById('next');
 
-document.getElementById('play-pause').addEventListener('click', () => {
-    if (audio.paused) {
-        audio.play();
-        document.getElementById('play-pause').innerHTML = '<i class="fas fa-pause"></i>';
-    } else {
-        audio.pause();
-        document.getElementById('play-pause').innerHTML = '<i class="fas fa-play"></i>';
-    }
-});
+if (playPauseButton && prevButton && nextButton) {
+    const audio = new Audio(); // Inicializa o objeto de áudio
 
-document.getElementById('prev').addEventListener('click', () => {
-    // Lógica para tocar a música anterior
-});
+    playPauseButton.addEventListener('click', () => {
+        if (audio.src === '') {
+            alert('Nenhuma música carregada.');
+            return;
+        }
 
-document.getElementById('next').addEventListener('click', () => {
-    // Lógica para tocar a próxima música
-});
-
-document.querySelector('.progress-bar input').addEventListener('input', (e) => {
-    audio.currentTime = (audio.duration / 100) * e.target.value;
-});
-
-document.querySelector('.volume-control input').addEventListener('input', (e) => {
-    audio.volume = e.target.value / 100;
-});
-
-function showSection(sectionId) {
-    document.querySelectorAll('.section').forEach(section => {
-        section.style.display = 'none';
+        if (audio.paused) {
+            audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+            playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            audio.pause();
+            playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
     });
-    document.getElementById(sectionId).style.display = 'block';
+
+    prevButton.addEventListener('click', () => {
+        console.log('Tocar música anterior');
+        // Adicione a lógica para selecionar e carregar a música anterior no áudio
+    });
+
+    nextButton.addEventListener('click', () => {
+        console.log('Tocar próxima música');
+        // Adicione a lógica para selecionar e carregar a próxima música no áudio
+    });
+} else {
+    console.error('Um ou mais botões de controle de música não foram encontrados.');
 }
 
-function searchMusic() {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    const results = musicData.songs.filter(song => 
-        song.title.toLowerCase().includes(query) || 
-        song.artist.toLowerCase().includes(query));
-    
-    const searchResults = document.getElementById('search-results');
-    searchResults.innerHTML = '';
-    results.forEach(result => {
-        const div = document.createElement('div');
-        div.className = 'search-result';
-        div.innerHTML = `<img src="${result[_{{{CITATION{{{_1{](https://github.com/fireun/Masomon-Online-Shopping/tree/6fa264f2c43c095aa821a7eafd80b8ca66a77afe/user%2FcancellationRequest.php)
