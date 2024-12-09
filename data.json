@@ -11,12 +11,12 @@
             "canvas": "canvas1.mp4"
         },
         {
-            "title": "Song 2",
-            "artist": "Artist 2",
-            "album_cover": "cover2.jpg",
-            "audio": "song2.ogg",
-            "format": "ogg",
-            "length": "4:15",
+            "title": "Grieved You",
+            "artist": "Skye Riley",
+            "album_cover": "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/8e3732cc-21f4-4e18-812d-e60ec75bb636.image.png?v=1733707595069",
+            "audio": "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/Grieved_You_performed_by_Naomi_Scott_%5B_YTBMP3.org_%5D.mp3?v=1733707718041",
+            "format": "mp3",
+            "length": "2:39",
             "icon": "artist2.jpg",
             "canvas": "canvas2.mp4"
         }
