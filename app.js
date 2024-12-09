@@ -1,5 +1,4 @@
-  <script>
-        document.getElementById('theme-toggle').addEventListener('click', () => {
+      document.getElementById('theme-toggle').addEventListener('click', () => {
             document.body.classList.toggle('light-theme');
             const isLightTheme = document.body.classList.contains('light-theme');
             document.getElementById('theme-toggle').textContent = isLightTheme ? 'Dark Mode' : 'Light Mode';
@@ -96,4 +95,3 @@
         } else {
             console.error('Um ou mais botões de controle de música não foram encontrados.');
         }
-    </script>
