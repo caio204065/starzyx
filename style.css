@@ -1,0 +1,99 @@
+body {
+    font-family: 'Circular', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #181818;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.user-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#theme-toggle {
+    background-color: #1db954;
+    color: #ffffff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.main {
+    padding-top: 80px;
+}
+
+.highlights, .suggestions {
+    padding: 20px;
+}
+
+.carousel {
+    display: flex;
+    gap: 10px;
+    overflow: auto;
+}
+
+.carousel-item {
+    flex: 0 0 auto;
+    width: 300px;
+    height: 200px;
+    background-color: #282828;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.horizontal-list {
+    display: flex;
+    gap: 10px;
+    overflow: auto;
+}
+
+footer {
+    background-color: #181818;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.music-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.volume-control, .progress-bar {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}

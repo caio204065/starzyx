@@ -1,0 +1,24 @@
+{
+    "songs": [
+        {
+            "title": "Song 1",
+            "artist": "Artist 1",
+            "album_cover": "cover1.jpg",
+            "audio": "song1.mp3",
+            "format": "mp3",
+            "length": "3:45",
+            "icon": "artist1.jpg",
+            "canvas": "canvas1.mp4"
+        },
+        {
+            "title": "Song 2",
+            "artist": "Artist 2",
+            "album_cover": "cover2.jpg",
+            "audio": "song2.ogg",
+            "format": "ogg",
+            "length": "4:15",
+            "icon": "artist2.jpg",
+            "canvas": "canvas2.mp4"
+        }
+    ]
+}
