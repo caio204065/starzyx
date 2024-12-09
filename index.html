@@ -11,6 +11,13 @@
             color: #000;
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s;
+        }
+
+        /* Tema claro e escuro */
+        body.light-theme {
+            background-color: #121212;
+            color: #fff;
         }
 
         .navbar {
@@ -24,6 +31,10 @@
             top: 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 1000;
+        }
+
+        .navbar.light-theme {
+            background-color: #1e1e1e;
         }
 
         .nav-links {
@@ -43,6 +54,10 @@
 
         .nav-links a:hover {
             background-color: #e0e0e0;
+        }
+
+        .nav-links a.light-theme {
+            color: #fff;
         }
 
         .user-controls {
@@ -68,65 +83,11 @@
 
         .main {
             padding-top: 80px;
-        }
-
-        .section {
-            padding: 20px;
-        }
-
-        .carousel {
-            display: flex;
-            gap: 10px;
-            overflow: auto;
-        }
-
-        .carousel-item {
-            flex: 0 0 auto;
-            width: 300px;
-            height: 200px;
-            background-color: #d1d1d1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .carousel-item:hover {
-            transform: scale(1.05);
-        }
-
-        .horizontal-list {
-            display: flex;
-            gap: 10px;
-            overflow: auto;
-            padding-bottom: 20px;
-        }
-
-        .genre-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .genre {
-            background-color: #d1d1d1;
-            padding: 20px;
-            border-radius: 10px;
             text-align: center;
-            width: 150px;
-            height: 150px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 16px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
         }
 
-        .genre:hover {
-            transform: scale(1.05);
+        .main h1 {
+            margin-top: 50px;
         }
 
         footer {
@@ -139,6 +100,10 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer.light-theme {
+            background-color: #1e1e1e;
         }
 
         .music-controls {
@@ -161,48 +126,6 @@
         .music-controls button:hover {
             background-color: #005bb5;
         }
-
-        .progress-bar, .volume-control {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .progress-bar input, .volume-control input {
-            width: 100px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        #search-input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d1d1;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .search-result {
-            background-color: #fff;
-            padding: 10px;
-            border: 1px solid #d1d1d1;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: transform 0.3s;
-        }
-
-        .search-result img {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
-        }
-
-        .search-result:hover {
-            transform: scale(1.05);
-        }
     </style>
 </head>
 <body>
@@ -222,15 +145,80 @@
             </div>
         </nav>
     </header>
+
     <main class="main">
         <h1>Bem-vindo ao MyMusic</h1>
     </main>
-    <footer>
+
+    <footer class="footer">
         <div class="music-controls">
             <button id="prev"><i class="fas fa-backward"></i></button>
             <button id="play-pause"><i class="fas fa-play"></i></button>
             <button id="next"><i class="fas fa-forward"></i></button>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const isLightTheme = document.body.classList.contains('light-theme');
+            document.getElementById('theme-toggle').textContent = isLightTheme ? 'Dark Mode' : 'Light Mode';
+            document.querySelectorAll('.navbar a').forEach(link => link.classList.toggle('light-theme', isLightTheme));
+        });
+
+        const playPauseButton = document.getElementById('play-pause');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+
+        if (playPauseButton && prevButton && nextButton) {
+            let audio = new Audio();
+            let currentSongIndex = 0;
+            const songs = [
+                {
+                    title: "New Brain",
+                    artist: "Skye Riley",
+                    audio: "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/New_Brain_performed_by_Naomi_Scott_%5B_YTBMP3.org_%5D.mp3?v=1733705309475",
+                },
+                {
+                    title: "Song 2",
+                    artist: "Artist 2",
+                    audio: "song2.ogg",
+                }
+            ];
+
+            function loadSong(songIndex) {
+                const song = songs[songIndex];
+                audio.src = song.audio;
+                audio.load();
+                playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+            }
+
+            loadSong(currentSongIndex);
+
+            playPauseButton.addEventListener('click', () => {
+                if (audio.paused) {
+                    audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+                    playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    audio.pause();
+                    playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            });
+
+            prevButton.addEventListener('click', () => {
+                currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+                loadSong(currentSongIndex);
+                audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+            });
+
+            nextButton.addEventListener('click', () => {
+                currentSongIndex = (currentSongIndex + 1) % songs.length;
+                loadSong(currentSongIndex);
+                audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+            });
+        } else {
+            console.error('Um ou mais botões de controle de música não foram encontrados.');
+        }
+    </script>
 </body>
 </html>
