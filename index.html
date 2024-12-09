@@ -121,6 +121,24 @@
             color: #fff;
         }
 
+        /* Barra de progresso */
+        .progress-bar {
+            width: 80%;
+            height: 5px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .progress-bar input {
+            width: 100%;
+            background-color: #007aff;
+            height: 5px;
+            border-radius: 5px;
+            outline: none;
+        }
+
         footer {
             background-color: #fff;
             position: fixed;
@@ -186,6 +204,10 @@
                 <p id="song-artist"></p>
                 <p id="song-length"></p>
             </div>
+            <!-- Barra de progresso -->
+            <div class="progress-bar">
+                <input type="range" id="progress" value="0" max="100" step="1">
+            </div>
         </div>
     </main>
 
@@ -207,8 +229,9 @@
         const playPauseButton = document.getElementById('play-pause');
         const prevButton = document.getElementById('prev');
         const nextButton = document.getElementById('next');
+        const progressBar = document.getElementById('progress');
 
-        if (playPauseButton && prevButton && nextButton) {
+        if (playPauseButton && prevButton && nextButton && progressBar) {
             let audio = new Audio();
             let currentSongIndex = 0;
             const songs = [
@@ -234,13 +257,15 @@
                 const song = songs[songIndex];
                 audio.src = song.audio;
                 audio.load();
-                
+
                 // Atualizando os detalhes da música
                 document.getElementById('album-cover').src = song.album_cover;
                 document.getElementById('song-title').textContent = song.title;
                 document.getElementById('song-artist').textContent = song.artist;
                 document.getElementById('song-length').textContent = song.length;
 
+                // Resetando a barra de progresso
+                progressBar.value = 0;
                 playPauseButton.innerHTML = '<i class="fas fa-play"></i>';
             }
 
@@ -266,6 +291,20 @@
                 currentSongIndex = (currentSongIndex + 1) % songs.length;
                 loadSong(currentSongIndex);
                 audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+            });
+
+            // Atualizando a barra de progresso enquanto a música toca
+            audio.ontimeupdate = () => {
+                if (!audio.paused) {
+                    const progress = (audio.currentTime / audio.duration) * 100;
+                    progressBar.value = progress;
+                }
+            };
+
+            // Permitindo que o usuário mude a posição da música
+            progressBar.addEventListener('input', () => {
+                const newTime = (progressBar.value / 100) * audio.duration;
+                audio.currentTime = newTime;
             });
         } else {
             console.error('Um ou mais botões de controle de música não foram encontrados.');
