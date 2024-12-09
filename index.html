@@ -4,115 +4,233 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Music Streaming Service</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/a076d053.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #000;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: #e0e0e0;
+        }
+
+        .user-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        #theme-toggle {
+            background-color: #007aff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        #theme-toggle:hover {
+            background-color: #005bb5;
+        }
+
+        .main {
+            padding-top: 80px;
+        }
+
+        .section {
+            padding: 20px;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 10px;
+            overflow: auto;
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 200px;
+            background-color: #d1d1d1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .carousel-item:hover {
+            transform: scale(1.05);
+        }
+
+        .horizontal-list {
+            display: flex;
+            gap: 10px;
+            overflow: auto;
+            padding-bottom: 20px;
+        }
+
+        .genre-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .genre {
+            background-color: #d1d1d1;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .genre:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: #fff;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .music-controls {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .music-controls button {
+            background-color: #007aff;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .music-controls button:hover {
+            background-color: #005bb5;
+        }
+
+        .progress-bar, .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .progress-bar input, .volume-control input {
+            width: 100px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d1d1;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .search-result {
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #d1d1d1;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s;
+        }
+
+        .search-result img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+        }
+
+        .search-result:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">MyMusic</div>
             <ul class="nav-links">
-                <li><a href="#" onclick="showSection('home')">Home</a></li>
-                <li><a href="#" onclick="showSection('explorar')">Explorar</a></li>
-                <li><a href="#" onclick="showSection('biblioteca')">Sua Biblioteca</a></li>
-                <li><a href="#" onclick="showSection('buscar')">Buscar</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Explorar</a></li>
+                <li><a href="#">Sua Biblioteca</a></li>
+                <li><a href="#">Buscar</a></li>
             </ul>
             <div class="user-controls">
-                <i class="fas fa-user-circle" aria-label="User Profile"></i>
-                <i class="fas fa-cog" aria-label="Settings"></i>
+                <i class="fas fa-user-circle"></i>
+                <i class="fas fa-cog"></i>
                 <button id="theme-toggle">Dark Mode</button>
             </div>
         </nav>
     </header>
-    <main>
-        <!-- Home Section -->
-        <section id="home" class="section">
-            <section class="highlights">
-                <div class="carousel">
-                    <!-- Carrossel de Destaques -->
-                    <div class="carousel-item">Destaque 1</div>
-                    <div class="carousel-item">Destaque 2</div>
-                    <div class="carousel-item">Destaque 3</div>
-                </div>
-            </section>
-            <section class="suggestions">
-                <h2>Tocados Recentemente</h2>
-                <div class="horizontal-list" id="recently-played"></div>
-                <h2>Feito para Você</h2>
-                <div class="horizontal-list" id="for-you"></div>
-                <h2>Novidades do Gênero Favorito</h2>
-                <div class="horizontal-list" id="favorite-releases"></div>
-            </section>
-        </section>
-        
-        <!-- Explorar Section -->
-        <section id="explorar" class="section hidden">
-            <section class="genres">
-                <h2>Gêneros e Mood</h2>
-                <div class="genre-list">
-                    <div class="genre">Rock</div>
-                    <div class="genre">Pop</div>
-                    <div class="genre">Hip-Hop</div>
-                </div>
-            </section>
-            <section class="rankings">
-                <h2>Top 10 Músicas/Artistas</h2>
-                <div class="ranking-list"></div>
-                <h2>Lançamentos da Semana</h2>
-                <div class="new-releases-list"></div>
-            </section>
-        </section>
-        
-        <!-- Biblioteca Section -->
-        <section id="biblioteca" class="section hidden">
-            <section class="favorites">
-                <h2>Seus Favoritos</h2>
-                <div class="favorites-list"></div>
-            </section>
-            <section class="playlists">
-                <h2>Playlists Criadas</h2>
-                <div class="playlists-list"></div>
-            </section>
-        </section>
-        
-        <!-- Buscar Section -->
-        <section id="buscar" class="section hidden">
-            <section class="search">
-                <input type="text" id="search-input" placeholder="Buscar músicas, artistas, álbuns...">
-                <button onclick="searchMusic()">Buscar</button>
-                <div class="search-results" id="search-results"></div>
-            </section>
-        </section>
+    <main class="main">
+        <h1>Bem-vindo ao MyMusic</h1>
     </main>
     <footer>
         <div class="music-controls">
-            <button id="prev"><i class="fas fa-backward" aria-label="Previous"></i></button>
-            <button id="play-pause"><i class="fas fa-play" aria-label="Play/Pause"></i></button>
-            <button id="next"><i class="fas fa-forward" aria-label="Next"></i></button>
-            <div class="progress-bar">
-                <label for="progress-range">Progress</label>
-                <input id="progress-range" type="range" min="0" max="100" value="0">
-            </div>
-            <div class="volume-control">
-                <label for="volume-range">Volume</label>
-                <input id="volume-range" type="range" min="0" max="100" value="50">
-            </div>
+            <button id="prev"><i class="fas fa-backward"></i></button>
+            <button id="play-pause"><i class="fas fa-play"></i></button>
+            <button id="next"><i class="fas fa-forward"></i></button>
         </div>
     </footer>
-    <script>
-        // Alterna entre as seções
-        function showSection(sectionId) {
-            document.querySelectorAll('.section').forEach(section => {
-                section.style.display = 'none';
-            });
-            document.getElementById(sectionId).style.display = 'block';
-        }
-
-        // Alterna o tema entre claro e escuro
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
-    </script>
 </body>
 </html>
