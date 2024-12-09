@@ -10,6 +10,11 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
 const playPauseButton = document.getElementById('play-pause');
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
+const progressBar = document.getElementById('progress'); // Barra de progresso
+const songTitle = document.getElementById('song-title');
+const songArtist = document.getElementById('song-artist');
+const albumCover = document.getElementById('album-cover');
+const songLength = document.getElementById('song-length'); // Tempo da música
 
 if (playPauseButton && prevButton && nextButton) {
     let audio = new Audio(); // Inicializa o objeto de áudio
@@ -39,7 +44,12 @@ if (playPauseButton && prevButton && nextButton) {
         const song = songs[songIndex];
         audio.src = song.audio;
         audio.load(); // Carrega a música
+        songTitle.textContent = song.title;
+        songArtist.textContent = song.artist;
+        albumCover.src = song.album_cover;
+        songLength.textContent = song.length;
         playPauseButton.innerHTML = '<i class="fas fa-play"></i>'; // Resetando o botão de play/pause
+        progressBar.value = 0; // Reseta a barra de progresso
         console.log(`Carregando: ${song.title} - ${song.artist}`);
     }
 
@@ -70,6 +80,21 @@ if (playPauseButton && prevButton && nextButton) {
         loadSong(currentSongIndex);
         audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
     });
+
+    // Atualizando a barra de progresso enquanto a música toca
+    audio.addEventListener('timeupdate', () => {
+        if (!audio.paused) {
+            const progress = (audio.currentTime / audio.duration) * 100;
+            progressBar.value = progress;
+        }
+    });
+
+    // Atualizando o progresso ao clicar na barra de progresso
+    progressBar.addEventListener('input', () => {
+        const progress = progressBar.value;
+        audio.currentTime = (progress / 100) * audio.duration;
+    });
+
 } else {
     console.error('Um ou mais botões de controle de música não foram encontrados.');
 }
