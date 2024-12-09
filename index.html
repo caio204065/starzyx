@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Music Streaming Service</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> <!-- Link para Font Awesome -->
     <style>
         body {
             font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -11,13 +12,6 @@
             color: #000;
             margin: 0;
             padding: 0;
-            transition: background-color 0.3s;
-        }
-
-        /* Tema claro e escuro */
-        body.light-theme {
-            background-color: #121212;
-            color: #fff;
         }
 
         .navbar {
@@ -31,10 +25,6 @@
             top: 0;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             z-index: 1000;
-        }
-
-        .navbar.light-theme {
-            background-color: #1e1e1e;
         }
 
         .nav-links {
@@ -54,10 +44,6 @@
 
         .nav-links a:hover {
             background-color: #e0e0e0;
-        }
-
-        .nav-links a.light-theme {
-            color: #fff;
         }
 
         .user-controls {
@@ -83,60 +69,10 @@
 
         .main {
             padding-top: 80px;
-            text-align: center;
         }
 
-        .main h1 {
-            margin-top: 50px;
-        }
-
-        /* Painel de música */
-        .music-panel {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
+        .section {
             padding: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
-        }
-
-        .music-panel.light-theme {
-            background-color: #1e1e1e;
-        }
-
-        .music-panel img {
-            max-width: 200px;
-            border-radius: 10px;
-        }
-
-        .music-details {
-            margin-top: 20px;
-            color: #000;
-        }
-
-        .music-details.light-theme {
-            color: #fff;
-        }
-
-        /* Barra de progresso */
-        .progress-bar {
-            width: 80%;
-            height: 5px;
-            background-color: #ddd;
-            border-radius: 5px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-
-        .progress-bar input {
-            width: 100%;
-            background-color: #007aff;
-            height: 5px;
-            border-radius: 5px;
-            outline: none;
         }
 
         footer {
@@ -149,10 +85,6 @@
             justify-content: space-between;
             align-items: center;
             box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .footer.light-theme {
-            background-color: #1e1e1e;
         }
 
         .music-controls {
@@ -168,12 +100,53 @@
             padding: 10px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 24px;
             transition: background-color 0.3s;
         }
 
         .music-controls button:hover {
             background-color: #005bb5;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background-color: #d1d1d1;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .progress-bar input {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        #search-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d1d1;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .song-details {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .song-details img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+        }
+
+        .song-info {
+            flex: 1;
+        }
+
+        .song-info h2, .song-info p {
+            margin: 0;
         }
     </style>
 </head>
@@ -196,26 +169,27 @@
     </header>
 
     <main class="main">
-        <h1>Bem-vindo ao MyMusic</h1>
-        <div class="music-panel" id="music-panel">
-            <img id="album-cover" src="" alt="Capa do álbum">
-            <div class="music-details">
-                <h3 id="song-title"></h3>
-                <p id="song-artist"></p>
-                <p id="song-length"></p>
-            </div>
-            <!-- Barra de progresso -->
-            <div class="progress-bar">
-                <input type="range" id="progress" value="0" max="100" step="1">
+        <div class="section">
+            <h1>Bem-vindo ao MyMusic</h1>
+            <div class="song-details">
+                <img id="album-cover" src="" alt="Capa do álbum">
+                <div class="song-info">
+                    <h2 id="song-title"></h2>
+                    <p id="song-artist"></p>
+                    <p id="song-length"></p>
+                </div>
             </div>
         </div>
     </main>
 
-    <footer class="footer">
+    <footer>
         <div class="music-controls">
             <button id="prev"><i class="fas fa-backward"></i></button>
             <button id="play-pause"><i class="fas fa-play"></i></button>
             <button id="next"><i class="fas fa-forward"></i></button>
+        </div>
+        <div class="progress-bar">
+            <input id="progress" type="range" value="0" min="0" max="100">
         </div>
     </footer>
 
