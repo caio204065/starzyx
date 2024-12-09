@@ -15,33 +15,19 @@ const songTitle = document.getElementById('song-title');
 const songArtist = document.getElementById('song-artist');
 const albumCover = document.getElementById('album-cover');
 const songLength = document.getElementById('song-length'); // Tempo da música
+const songList = document.getElementById('song-list'); // Supondo que você tenha uma lista de músicas no HTML
 
-if (playPauseButton && prevButton && nextButton) {
-    let audio = new Audio(); // Inicializa o objeto de áudio
+// Função para carregar as músicas do arquivo JSON
+fetch('songs.json')
+  .then(response => response.json())
+  .then(data => {
+    const songs = data; // Lista de músicas carregada do JSON
     let currentSongIndex = 0; // Índice da música atual
-    const songs = [
-        {
-            title: "New Brain",
-            artist: "Skye Riley",
-            album_cover: "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/OIP.jpeg?v=1733705020179",
-            audio: "https://cdn.glitch.global/ed9bb939-dcf1-4423-8ca5-56e3b4ceb695/New_Brain_performed_by_Naomi_Scott_%5B_YTBMP3.org_%5D.mp3?v=1733705309475",
-            format: "mp3",
-            length: "3:04"
-        },
-        {
-            title: "Song 2",
-            artist: "Artist 2",
-            album_cover: "cover2.jpg",
-            audio: "song2.ogg",
-            format: "ogg",
-            length: "4:15"
-        }
-        // Adicione mais músicas conforme necessário
-    ];
 
     // Função para carregar uma música
     function loadSong(songIndex) {
         const song = songs[songIndex];
+        const audio = new Audio();
         audio.src = song.audio;
         audio.load(); // Carrega a música
         songTitle.textContent = song.title;
@@ -58,6 +44,7 @@ if (playPauseButton && prevButton && nextButton) {
 
     // Lógica do botão de Play/Pause
     playPauseButton.addEventListener('click', () => {
+        const audio = new Audio();
         if (audio.paused) {
             audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
             playPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
@@ -95,6 +82,16 @@ if (playPauseButton && prevButton && nextButton) {
         audio.currentTime = (progress / 100) * audio.duration;
     });
 
-} else {
-    console.error('Um ou mais botões de controle de música não foram encontrados.');
-}
+    // Adicionando as músicas ao menu (supondo que você tenha um elemento para a lista de músicas)
+    songs.forEach((song, index) => {
+        const songItem = document.createElement('li');
+        songItem.textContent = `${song.title} - ${song.artist}`;
+        songItem.addEventListener('click', () => {
+            loadSong(index);
+            audio.play().catch(error => console.error('Erro ao reproduzir o áudio:', error));
+        });
+        songList.appendChild(songItem); // Adiciona a música à lista
+    });
+
+  })
+  .catch(error => console.error('Erro ao carregar o arquivo JSON:', error));
